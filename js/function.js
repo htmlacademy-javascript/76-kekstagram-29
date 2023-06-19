@@ -18,12 +18,7 @@ function isPalindrom(string) {
   for (let i = cleanText.length - 1; i >= 0; i = i - 1) {
     reverseString += cleanText.at(i);
   }
-  if (reverseString === cleanText) {
-    return 'Это палиндром';
-  }
-  return 'Это не палиндром';
+  return (reverseString === cleanText) ? 'Палиндром' : 'Не палиндром';
 }
 
 isPalindrom('топот');
-
-
