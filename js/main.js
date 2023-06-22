@@ -1,3 +1,4 @@
+
 /* Структура каждого объекта должна быть следующей:
 
 - id, число — идентификатор опубликованной фотографии. Это число от 1 до 25. Идентификаторы не должны повторяться.
@@ -25,18 +26,15 @@
 
 - Для формирования текста комментария — message — вам необходимо взять одно или два случайных предложения из представленных ниже:
 
-Всё отлично!
-В целом всё неплохо. Но не всё.
-Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.
-Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.
-Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.
-Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!
-
 - Имена авторов также должны быть случайными. Набор имён для комментаторов составьте сами.
 Подставляйте случайное имя в поле name.
 
 */
-
+const PICTURE_COUNT = 25;
+const AVATAR_COUNT = 6;
+const LIKE_MIN_COUNT = 15;
+const LIKE_MAX_COUNT = 200;
+const COMMENT_COUNT = 30;
 const NAMES = [
   'Александр',
   'Алексей',
@@ -70,8 +68,6 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const PHOTO_ID = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-
 //функция поиска случайного индекса элемента
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -80,54 +76,54 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-//функция получения случайных идентификаторов из диапозона без повторений
-function createRandomIdFromRangeGenerator (min, max) {
-  const previousValues = [];
+const getRandomArrayElement = (items) =>
+  items[getRandomInteger(0, items.length - 1)];
 
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    while (previousValues.includes(currentValue)) { //проверяем на уникальность
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue); // записываем в массив
-    return currentValue;
-  };
-}
+const createIdGenerator = () => {
+  let lasGeneratedId = 0;
 
-const photoComment = () => {
-  const randomNameIndex = getRandomInteger(0, NAMES.length - 1); //ищем случайное имя
-  const randomMessageIndex = getRandomInteger(0, NAMES.length - 1); //ищем случайное сообщение
-  return {
-    message: MESSAGES[randomMessageIndex], //записываем случайное сообщение
-    name: NAMES[randomNameIndex], //записываем случайное имя
-    idСomment: '',
-    avatar: '',
+  return () => {
+    lasGeneratedId += 1;
+    return lasGeneratedId;
   };
 };
 
+const generateCommentId = createIdGenerator();
 
-const photoDescription = () => {
-  const randomIndex = getRandomInteger(0, NAMES.length - 1); //ищем случайный ID
-  const urlAddressNumber = createRandomIdFromRangeGenerator (1,25); //ищем адрес картинки
-  return {
-    id: PHOTO_ID [randomIndex],
-    url: 'photos/' + urlAddressNumber () + '.jpg',
-    description: 'Классная фотография!',
-    likes: getRandomInteger (15,200),
-    comments: photoComment (),
+const createMessage = () => Array.from(
+  { length: getRandomInteger(1, 2) },
+  () => getRandomArrayElement(MESSAGES),
+).join(' ');
 
-  };
+//создаём комментарий
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
+  message: createMessage(),
+  name: getRandomArrayElement(NAMES),
+});
 
-};
+//получение фоточек
+const photoDescription = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: 'Классная фотография!',
+  likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
+  comments: Array.from(
+    { length: getRandomInteger(0, COMMENT_COUNT) },
+    createComment,
+  ),
 
-let result1 = photoComment ();
-console.log (result1);
-
-let result2 = photoDescription ();
-console.log (result2);
+});
 
 
-// const PHOTO_ID = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-// const PHOTO_ADDRESS = [photos/{{i}}.jpg];
+const getPictures = () => Array.from(
+  { length: PICTURE_COUNT },
+  (_, pictureIndex) => photoDescription(pictureIndex + 1),
+);
 
-// const LIKE_COUNTER = [15..valueOf200];
+let result1 = createComment();
+console.log(result1);
+
+let result2 = getPictures();
+console.log(result2);
