@@ -7,7 +7,7 @@ const pictureInfoTemplate = document.querySelector('#picture')
 
 const miniPictures = getPictures();
 
-const pictureInfoItem = document.createDocumentFragment();
+const pictureFragment = document.createDocumentFragment();
 
 miniPictures.forEach(({url, description, likes, comments}) => {
   const pictureElement = pictureInfoTemplate.cloneNode(true);
@@ -15,9 +15,9 @@ miniPictures.forEach(({url, description, likes, comments}) => {
   pictureElement.querySelector ('.picture__img').alt = description;
   pictureElement.querySelector ('.picture__likes').textContent = likes;
   pictureElement.querySelector ('.picture__comments').textContent = comments.length;
-  pictureInfoItem.appendChild(pictureElement);
+  pictureFragment.appendChild(pictureElement);
 
 });
 
-container.append(pictureInfoItem);
+container.append(pictureFragment);
 
