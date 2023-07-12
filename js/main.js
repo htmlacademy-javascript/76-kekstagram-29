@@ -1,4 +1,6 @@
 import {getPictures} from'./data.js';
-import {renderPictures} from './picture.js';
+import './picture.js';
 
-renderPictures (getPictures());
+console.log (
+  getPictures()
+  );
