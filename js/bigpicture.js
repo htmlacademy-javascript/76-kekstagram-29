@@ -6,13 +6,14 @@ const bodyElement = document.querySelector('body');
 const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 const commentElement = commentListElement.querySelector('.social__comment');
 
-//создаём комменты и подставляем в каждый из них данных из объекта
+//создаём комменты и подставляем в каждый из них данные из объекта
 const createComment = ({ avatar, name, message }) => {
   const comment = commentElement.cloneNode(true);
 
   comment.querySelector('.social__picture').src = avatar;
   comment.querySelector('.social__picture').alt = name;
   comment.querySelector('.social__picture').textContent = message;
+  comment.querySelector('.social__text').textContent = message;
 
   return comment;
 };
