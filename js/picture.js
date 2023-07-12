@@ -22,8 +22,8 @@ const renderPictures = (pictures) => {
   pictureFragment.append(pictureElement);
 
 });
-
 container.append(pictureFragment);
+};
 
 export { renderPictures };
-testpush
+
