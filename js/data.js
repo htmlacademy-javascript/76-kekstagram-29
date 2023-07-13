@@ -40,11 +40,21 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+const DESCRIPTION = [
+  'Классная фотография!',
+  'Прикольная фотография!',
+  'У меня новая фотография!',
+  'Зацените фотографию!',
+];
+
 //выбираем сообщение из 1 или 2 строк, соединяем если строки 2
 const createMessage = () => Array.from(
   { length: getRandomInteger(1, 2) },
   () => getRandomArrayElement(MESSAGES),
 ).join(' ');
+
+const createDescription = () => Array.from(
+  getRandomArrayElement(DESCRIPTION)).join('');
 
 //создаём комментарий
 const createComment = () => ({
@@ -58,7 +68,7 @@ const createComment = () => ({
 const photoDescription = (index) => ({
   id: index,
   url: `photos/${index}.jpg`,
-  description: 'Классная фотография!',
+  description: createDescription(),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: Array.from(
     { length: getRandomInteger(0, COMMENT_COUNT) },
