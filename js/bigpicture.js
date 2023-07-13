@@ -23,10 +23,6 @@ const createComment = ({ avatar, name, message }) => {
   return comment;
 };
 
-const commentCounterCompare = () => {
-  commentShownCountElement.innerHTML = `${commentsShow} из <span class="comments-count">${comments.length}</span> комментариев`;
-}
-
 //генерируем комменты
 const renderComments = () => {
   commentsShown += COMMENTS_LOAD;
@@ -47,8 +43,6 @@ const renderComments = () => {
   commentListElement.append(fragment);
   commentShownCountElement.textContent = commentsShown;
   commentCountElement.textContent = comments.length;
-
-  commentCounterCompare();
 
 };
 
