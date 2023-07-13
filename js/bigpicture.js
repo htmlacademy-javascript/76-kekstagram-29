@@ -23,23 +23,20 @@ const createComment = ({ avatar, name, message }) => {
   return comment;
 };
 
-const commentCounterCompare = () => {
-  commentShownCountElement.innerHTML = `${commentsShow} из <span class="comments-count">${comments.length}</span> комментариев`;
-}
 
 //генерируем комменты
 const renderComments = () => {
   commentsShown += COMMENTS_LOAD;
 
   if (commentsShown >= comments.length) {
-    commentsLoaderElement.classList.add ('hidden');
+    commentsLoaderElement.classList.add('hidden');
     commentsShown = comments.length;
   } else {
-    commentsLoaderElement.classList.remove ('hidden');
+    commentsLoaderElement.classList.remove('hidden');
   }
   const fragment = document.createDocumentFragment();
-  for (let i=0; i < commentsShown; i++) {
-    const comment = createComment (comments[i]);
+  for (let i = 0; i < commentsShown; i++) {
+    const comment = createComment(comments[i]);
     fragment.append(comment);
   }
 
@@ -47,8 +44,6 @@ const renderComments = () => {
   commentListElement.append(fragment);
   commentShownCountElement.textContent = commentsShown;
   commentCountElement.textContent = comments.length;
-
-  commentCounterCompare();
 
 };
 
@@ -68,7 +63,7 @@ function onDocumentKeydown(evt) {
   }
 };
 
-const onCommentsLoaderClick = () => renderComments ();
+const onCommentsLoaderClick = () => renderComments();
 
 
 const onCancelButtonClick = () => {
