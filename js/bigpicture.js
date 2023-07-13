@@ -38,7 +38,7 @@ const renderComments = () => {
     commentsLoaderElement.classList.remove ('hidden');
   }
   const fragment = document.createDocumentFragment();
-  for (let i=0; i < commentsShown; i++) {
+  for (let i = 0; i < commentsShown; i++) {
     const comment = createComment (comments[i]);
     fragment.append(comment);
   }
@@ -66,7 +66,7 @@ function onDocumentKeydown(evt) {
     evt.preventDefault();
     hideBigPicture();
   }
-};
+}
 
 const onCommentsLoaderClick = () => renderComments ();
 
