@@ -23,7 +23,6 @@ const createComment = ({ avatar, name, message }) => {
   return comment;
 };
 
-
 //генерируем комменты
 const renderComments = () => {
   commentsShown += COMMENTS_LOAD;
@@ -61,7 +60,7 @@ function onDocumentKeydown(evt) {
     evt.preventDefault();
     hideBigPicture();
   }
-};
+}
 
 const onCommentsLoaderClick = () => renderComments();
 
