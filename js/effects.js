@@ -77,9 +77,9 @@ const updateSlider = () => {
     start: selectedEffect.max,
   });
   if (isDefault()) {
-    showSlider();
-  } else {
     hideSlider();
+  } else {
+    showSlider();
   }
 };
 

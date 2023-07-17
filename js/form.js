@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { resetScale } from './scale.js';
-import {resetEffects} from './effects.js';
+import { resetEffects } from './effects.js';
 
 const HASHTAG_COUNT_MAX = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -24,7 +24,7 @@ const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
 
-}, false);
+}, true);
 
 
 //проверка есть ли поле хэштегов или комментариев в фокусе
@@ -45,7 +45,7 @@ const showModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const hideModal = () => {
+function hideModal() {
   form.reset();
   resetScale();
   resetEffects();
@@ -53,7 +53,7 @@ const hideModal = () => {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-};
+}
 
 const normalizeTags = (tagString) => tagString
   .trim()
