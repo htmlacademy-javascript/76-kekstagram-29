@@ -7,10 +7,10 @@ const uploadElement = document.querySelector('.img-upload');
 const smallButtonElement = uploadElement.querySelector('.scale__control--smaller');
 const bigButtonElement = uploadElement.querySelector('.scale__control--bigger');
 const scaleInputElement = uploadElement.querySelector('.scale__control--value');
-const imageElement = uploadElement.querySelector('.img-upload__scale');
+const imageElement = uploadElement.querySelector('.img-upload__preview img');
 
 const ScaleImage = (value) => {
-  imageElement.computedStyleMap.transform = `scale(${value / 100})`;
+  imageElement.style.transform = `scale(${value / 100})`;
   scaleInputElement.value = `${value}%`;
 
 };

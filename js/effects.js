@@ -61,11 +61,13 @@ let selectedEffect = DEFAULT_EFFECT;
 const isDefault = () => selectedEffect === DEFAULT_EFFECT;
 
 const hideSlider = () => {
-  imgUploadEffectLevel.classList.remove('hidden');
-};
-const showSlider = () => {
   imgUploadEffectLevel.classList.add('hidden');
 };
+const showSlider = () => {
+  imgUploadEffectLevel.classList.remove('hidden');
+};
+
+hideSlider();
 
 const updateSlider = () => {
   sliderLevelElement.noUiSlider.updateOptions({
