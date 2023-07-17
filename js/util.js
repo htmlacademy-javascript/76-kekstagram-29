@@ -21,7 +21,9 @@ const createIdGenerator = () => {
 };
 
 const generateCommentId = createIdGenerator();
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {getRandomInteger};
 export {getRandomArrayElement};
 export {generateCommentId};
+export {isEscapeKey};

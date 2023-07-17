@@ -98,3 +98,4 @@ cancelButtonElement.addEventListener('click', onCancelButtonClick); //обраб
 commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
 export { showBigPicture };
+export { onDocumentKeydown };
