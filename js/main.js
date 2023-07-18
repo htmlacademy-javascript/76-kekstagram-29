@@ -1,10 +1,10 @@
 import {getPictures} from './data.js';
 import './form.js';
-import {renderPictures} from './picture.js';
+import './scale.js';
+import './effects.js';
 
 
 
 import { renderGallery } from './gallery.js';
 renderGallery (getPictures());
-showModal();
-hideModal();
+
