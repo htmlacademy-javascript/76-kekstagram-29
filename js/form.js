@@ -10,13 +10,19 @@ const ErrorText = {
   INVALID_PATTERN: 'Неправильный хэштег',
 };
 
+const submitButtonText = {
+  IDLE: 'Опубликовать',
+  SUBMITTING: 'Отправляю...',
+
+};
+
 const form = document.querySelector('.img-upload__form');
 const uploadFile = form.querySelector('#upload-file');
 const overlay = form.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const commentField = form.querySelector('.text__description');
 const hashtagField = form.querySelector('.text__hashtags');
-// const submitButton = form.querySelector('.img-upload__submit');
+const submitButton = form.querySelector('.img-upload__submit');
 const cancelButton = form.querySelector('.img-upload__cancel');
 
 
@@ -54,6 +60,13 @@ function hideModal() {
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
+
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled
+    ? submitButtonText.SUBMITTING
+    : submitButtonText.IDLE;
+};
 
 const normalizeTags = (tagString) => tagString
   .trim()
@@ -98,6 +111,20 @@ pristine.addValidator(
 const onCancelButtonClick = () => hideModal();
 const onInputChange = () => showModal();
 
+const setOnFormSubmit = (callback) => {
+  form.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      toggleSubmitButton(true);
+      await callback(new FormData(form));
+      toggleSubmitButton();
+    }
+  });
+};
+
 uploadFile.addEventListener('change', onInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
+
+export { setOnFormSubmit, hideModal };
