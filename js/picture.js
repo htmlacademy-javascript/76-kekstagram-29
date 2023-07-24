@@ -16,6 +16,7 @@ const createPicture = ({ url, description, likes, comments, id }) => {
 };
 
 const renderPictures = (pictures) => {
+  container.querySelectorAll('.picture').forEach((element) => element.remove());
   const pictureFragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
     const pictureElement = createPicture(picture);
