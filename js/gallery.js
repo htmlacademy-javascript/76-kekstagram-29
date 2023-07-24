@@ -19,7 +19,6 @@ const onContainerClick = (evt) => {
 
 };
 
-
 const renderGallery = (currentPictures) => {
   pictures = currentPictures;
   renderPictures(pictures, container);

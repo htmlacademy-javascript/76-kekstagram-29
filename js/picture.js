@@ -22,7 +22,6 @@ const renderPictures = (pictures) => {
     const pictureElement = createPicture(picture);
     pictureFragment.append(pictureElement);
   });
-
   container.append(pictureFragment);
 };
 
