@@ -9,6 +9,7 @@ const ErrorText = {
   NOT_UNIQUE: 'Хэштеги должны быть уникальные',
   INVALID_PATTERN: 'Неправильный хэштег',
 };
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const submitButtonText = {
   IDLE: 'Опубликовать',
@@ -24,6 +25,9 @@ const commentField = form.querySelector('.text__description');
 const hashtagField = form.querySelector('.text__hashtags');
 const submitButton = form.querySelector('.img-upload__submit');
 const cancelButton = form.querySelector('.img-upload__cancel');
+const fileField = form.querySelector ('.img-upload__input');
+const photoPreview = form.querySelector('.img-upload__preview img');
+const effectPreviews = form.querySelectorAll ('.effects__preview');
 
 
 const pristine = new Pristine(form, {
@@ -109,7 +113,6 @@ pristine.addValidator(
 );
 
 const onCancelButtonClick = () => hideModal();
-const onInputChange = () => showModal();
 
 const setOnFormSubmit = (callback) => {
   form.addEventListener('submit', async (evt) => {
@@ -123,7 +126,23 @@ const setOnFormSubmit = (callback) => {
   });
 };
 
-uploadFile.addEventListener('change', onInputChange);
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
+
+const onFileInput = () => {
+  const file = fileField.files[0];
+  if (file && isValidType(file)) {
+    photoPreview.src = URL.createObjectURL(file);
+    effectPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreview.src}')`;
+    });
+  }
+  showModal();
+};
+
+uploadFile.addEventListener('change', onFileInput);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
 

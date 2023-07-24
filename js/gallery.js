@@ -5,7 +5,7 @@ const container = document.querySelector('.pictures');
 
 let pictures = [];
 
-function onContainerClick(evt) {
+const onContainerClick = (evt) => {
   const pictureElement = evt.target.closest('[data-picture-element-id]');
   if (!pictureElement) {
     return;
@@ -17,7 +17,7 @@ function onContainerClick(evt) {
   );
   showBigPicture(picture);
 
-}
+};
 
 
 const renderGallery = (currentPictures) => {
