@@ -21,7 +21,7 @@ try {
   const data = await getData();
   const debouncedRenderGallery = debounce(renderGallery);
   initFilter(data, debouncedRenderGallery);
-  renderGallery(getFilteredPictures);
+  renderGallery(getFilteredPictures());
 } catch (err) {
   showAlert(err.message);
 }

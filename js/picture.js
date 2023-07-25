@@ -21,7 +21,6 @@ const renderPictures = (pictures) => {
   pictures.forEach((picture) => {
     const pictureElement = createPicture(picture);
     pictureFragment.append(pictureElement);
-
   });
   container.append(pictureFragment);
 };
