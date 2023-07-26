@@ -25,9 +25,9 @@ const commentField = form.querySelector('.text__description');
 const hashtagField = form.querySelector('.text__hashtags');
 const submitButton = form.querySelector('.img-upload__submit');
 const cancelButton = form.querySelector('.img-upload__cancel');
-const fileField = form.querySelector ('.img-upload__input');
+const fileField = form.querySelector('.img-upload__input');
 const photoPreview = form.querySelector('.img-upload__preview img');
-const effectPreviews = form.querySelectorAll ('.effects__preview');
+const effectPreviews = form.querySelectorAll('.effects__preview');
 
 
 const pristine = new Pristine(form, {
@@ -36,8 +36,6 @@ const pristine = new Pristine(form, {
 
 }, true);
 
-
-//проверка есть ли поле хэштегов или комментариев в фокусе
 const isFocused = () =>
   document.activeElement === hashtagField ||
   document.activeElement === commentField;
@@ -146,4 +144,4 @@ uploadFile.addEventListener('change', onFileInput);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
 
-export { setOnFormSubmit, hideModal };
+export { setOnFormSubmit, hideModal, onDocumentKeydown };

@@ -1,3 +1,5 @@
+import { onDocumentKeydown } from './form.js';
+
 const successMessage = document
   .querySelector('#success')
   .content.querySelector('.success');
@@ -7,12 +9,12 @@ const errorMessage = document
 const body = document.querySelector('body');
 
 function hideMessage() {
+
   const messageElement = document.querySelector('.success') || document.querySelector('.error');
   messageElement.remove();
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentKeydownEsc);
   body.removeEventListener('click', onBodyClick);
 }
-
 
 function onBodyClick(evt) {
   if (
@@ -24,7 +26,7 @@ function onBodyClick(evt) {
   hideMessage();
 }
 
-function onDocumentKeydown(evt) {
+function onDocumentKeydownEsc(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     hideMessage();
@@ -33,14 +35,16 @@ function onDocumentKeydown(evt) {
 
 const showMessage = (messageElement, closeButtonClass) => {
   body.append(messageElement);
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydownEsc);
   body.addEventListener('click', onBodyClick);
   messageElement
     .querySelector(closeButtonClass)
     .addEventListener('click', hideMessage);
-
+  if (errorMessage) {
+    document.addEventListener('keydown', onDocumentKeydownEsc);
+  }
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
-
 
 const showErrorMessage = () => {
   showMessage(errorMessage, '.error__button');
