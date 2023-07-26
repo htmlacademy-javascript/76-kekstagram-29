@@ -11,7 +11,6 @@ const COMMENTS_LOAD = 5;
 let commentsShown = 0;
 let comments = [];
 
-//создаём комменты и подставляем в каждый из них данные из объекта
 const createComment = ({ avatar, name, message }) => {
   const comment = commentElement.cloneNode(true);
 
@@ -23,7 +22,6 @@ const createComment = ({ avatar, name, message }) => {
   return comment;
 };
 
-//генерируем комменты
 const renderComments = () => {
   commentsShown += COMMENTS_LOAD;
 
@@ -64,12 +62,10 @@ function onDocumentKeydown(evt) {
 
 const onCommentsLoaderClick = () => renderComments();
 
-
 const onCancelButtonClick = () => {
   hideBigPicture();
 };
 
-//отрисовываем большое фото со всеми данными, полученными из объекта
 const renderPictureDetails = ({ url, likes, description }) => {
 
   bigPictureElement.querySelector('.big-picture__img img').src = url;
@@ -79,7 +75,6 @@ const renderPictureDetails = ({ url, likes, description }) => {
 
 };
 
-//функция показать большое фото
 const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
@@ -89,12 +84,12 @@ const showBigPicture = (data) => {
   renderPictureDetails(data);
   comments = data.comments;
   if (comments.length > 0) {
-    renderComments();//отрисовываем под фоткой комментарии, берём данные из data
+    renderComments();
   }
 
 };
 
-cancelButtonElement.addEventListener('click', onCancelButtonClick); //обработчик для закрытия окна фото по клику
+cancelButtonElement.addEventListener('click', onCancelButtonClick);
 commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
 export { showBigPicture };
