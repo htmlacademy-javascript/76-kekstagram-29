@@ -11,7 +11,7 @@ const ErrorText = {
 };
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-const submitButtonText = {
+const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SUBMITTING: 'Отправляю...',
 
@@ -66,8 +66,8 @@ function hideModal() {
 const toggleSubmitButton = (isDisabled) => {
   submitButton.disabled = isDisabled;
   submitButton.textContent = isDisabled
-    ? submitButtonText.SUBMITTING
-    : submitButtonText.IDLE;
+    ? SubmitButtonText.SUBMITTING
+    : SubmitButtonText.IDLE;
 };
 
 const normalizeTags = (tagString) => tagString

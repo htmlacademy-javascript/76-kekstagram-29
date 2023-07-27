@@ -1,3 +1,4 @@
+const COMMENTS_LOAD = 5;
 const bigPictureElement = document.querySelector('.big-picture');
 const commentCountElement = bigPictureElement.querySelector('.comments-count'); //общее количество комментариев
 const commentShownCountElement = bigPictureElement.querySelector('.comments-count-show'); //подгруженные комментарии
@@ -7,7 +8,6 @@ const bodyElement = document.querySelector('body');
 const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 const commentElement = commentListElement.querySelector('.social__comment');
 
-const COMMENTS_LOAD = 5;
 let commentsShown = 0;
 let comments = [];
 
